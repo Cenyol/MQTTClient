@@ -1,14 +1,12 @@
 package com.cenyol.study;
 
-import java.util.Date;
-
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class CenyolLikeTalk implements Runnable{
+public class CenyolLikeListen implements Runnable{
     private MyMqttClient myMqttClient;
 
-    public CenyolLikeTalk(MyMqttClient myMqttClient) {
+    public CenyolLikeListen(MyMqttClient myMqttClient) {
         this.myMqttClient = myMqttClient;
     }
 
@@ -22,11 +20,10 @@ public class CenyolLikeTalk implements Runnable{
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+        String[] topics = {"test", "test"};
         while (true){
             try {
-                myMqttClient.publish("test",  "hello everybody, I am " + myMqttClient.getClientId() +
-                    ", now time is " + new Date().toString()
-                );
+                myMqttClient.subscribe(topics);
                 Thread.sleep(2000);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -5,6 +5,7 @@ package com.cenyol.study;
  */
 public class ServerHost {
     private String protocol = "tcp";
+//    private String ip = "localhost";
     private String ip = "121.40.130.184";
     private int port = 1883;
 

@@ -7,6 +7,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -14,16 +16,25 @@ import java.util.concurrent.Executors;
  * Created by cenyol on 22/03/2017.
  */
 public class MyMqttClient {
+    public static final int CLIENT_COUNT = 1;
+
     /**
      * @param args
      */
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i < 300; i++){
-            executorService.execute(new CenyolLikeTalk(new MyMqttClient()));
+        for (int i = 0; i < CLIENT_COUNT; i++){
+
+            try {
+                Thread.sleep(3 * 1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            executorService.execute(new CenyolLikeListen(new MyMqttClient(i+"")));
+//            executorService.execute(new CenyolLikeTalk(new MyMqttClient(i+"")));
         }
     }
-
 
 
     private String clientId = "";
@@ -31,10 +42,11 @@ public class MyMqttClient {
     private MqttClient sampleClient = null;
     private MemoryPersistence persistence;
 
-    public MyMqttClient() {
+    public MyMqttClient(String clientID) {
         serverHost = new ServerHost();
         persistence = new MemoryPersistence();
-        this.clientId = Utils.RandomString(32);
+        this.clientId = clientID;
+//        this.clientId = Utils.RandomString(32);
     }
 
     public void subscribe(String[] topicFilters) throws Exception{    // 其实就是加入一个群，然后等着接受消息
@@ -65,9 +77,13 @@ public class MyMqttClient {
     private void connect() throws MqttException{
         if (sampleClient != null) return;
 
+
         String broker = serverHost.getBrokerAddress();
         sampleClient = new MqttClient(broker, clientId,persistence);
         MqttConnectOptions connOpts = new MqttConnectOptions();
+        connOpts.setUserName(clientId);
+        char[] passwd = {'t', 'e', 's', 't'};
+        connOpts.setPassword(passwd);
         //connOpts.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1);
         System. out .println("The MQTT Version is:"+connOpts.getMqttVersion());
         connOpts.setCleanSession( false );
@@ -89,5 +105,10 @@ public class MyMqttClient {
 
     public String getClientId() {
         return clientId;
+    }
+
+    public void disconnect() throws MqttException {
+        sampleClient.disconnect();
+        System. out .println( "Disconnected" );
     }
 }
