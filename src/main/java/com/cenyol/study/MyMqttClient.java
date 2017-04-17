@@ -17,7 +17,7 @@ import java.util.concurrent.Executors;
  * Created by cenyol on 22/03/2017.
  */
 public class MyMqttClient {
-    public static final int CLIENT_COUNT = 100;
+    public static final int CLIENT_COUNT = 500;
     public static final int TOTAL_TIME_MiLiSECOND = 10 * 1000;
 
     /**
@@ -26,8 +26,8 @@ public class MyMqttClient {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < CLIENT_COUNT; i++){
-//            executorService.execute(new CenyolLikeListen(new MyMqttClient(i+"")));
-            executorService.execute(new CenyolLikeTalk(new MyMqttClient("MBP_" + i)));
+            executorService.execute(new CenyolLikeListen(new MyMqttClient(i+"")));
+//            executorService.execute(new CenyolLikeTalk(new MyMqttClient("MBP_" + i)));
 
             try {
                 Thread.sleep(TOTAL_TIME_MiLiSECOND / CLIENT_COUNT);
