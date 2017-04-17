@@ -24,10 +24,11 @@ public class CenyolLikeTalk implements Runnable{
 //        }
         while (true){
             try {
-                myMqttClient.publish("test",  "hello everybody, I am " + myMqttClient.getClientId() +
-                    ", now time is " + new Date().toString()
-                );
-                Thread.sleep(2000);
+                myMqttClient.publish("test",  new Date().toString());
+//                myMqttClient.publish("test",  "hello everybody, I am " + myMqttClient.getClientId() +
+//                    ", now time is " + new Date().toString()
+//                );
+                Thread.sleep(10000);
             } catch (Exception e) {
                 e.printStackTrace();
             }

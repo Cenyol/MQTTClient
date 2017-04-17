@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
  * Created by cenyol on 22/03/2017.
  */
 public class MyMqttClient {
-    public static final int CLIENT_COUNT = 1;
+    public static final int CLIENT_COUNT = 1000;
 
     /**
      * @param args
@@ -24,15 +24,14 @@ public class MyMqttClient {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < CLIENT_COUNT; i++){
+//            executorService.execute(new CenyolLikeListen(new MyMqttClient(i+"")));
+            executorService.execute(new CenyolLikeTalk(new MyMqttClient(i+"")));
 
             try {
-                Thread.sleep(3 * 1000);
+                Thread.sleep(1);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            executorService.execute(new CenyolLikeListen(new MyMqttClient(i+"")));
-//            executorService.execute(new CenyolLikeTalk(new MyMqttClient(i+"")));
         }
     }
 
@@ -81,9 +80,9 @@ public class MyMqttClient {
         String broker = serverHost.getBrokerAddress();
         sampleClient = new MqttClient(broker, clientId,persistence);
         MqttConnectOptions connOpts = new MqttConnectOptions();
-        connOpts.setUserName(clientId);
-        char[] passwd = {'t', 'e', 's', 't'};
-        connOpts.setPassword(passwd);
+//        connOpts.setUserName(clientId);
+//        char[] passwd = {'t', 'e', 's', 't'};
+//        connOpts.setPassword(passwd);
         //connOpts.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1);
         System. out .println("The MQTT Version is:"+connOpts.getMqttVersion());
         connOpts.setCleanSession( false );
