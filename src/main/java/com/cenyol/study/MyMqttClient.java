@@ -7,6 +7,7 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -89,7 +90,7 @@ public class MyMqttClient {
         connOpts.setCleanSession( false );
         System. out .println( "Connecting to broker: " + broker);
         sampleClient.connect(connOpts);
-        System. out .println( "Connected" );
+        System. out .println( "Connected"  + new Date().toString());
         sampleClient.setCallback(new CustomMQTTCallBack());
     }
 
