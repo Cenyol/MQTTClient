@@ -26,7 +26,7 @@ public class MyMqttClient {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < CLIENT_COUNT; i++){
-            executorService.execute(new CenyolLikeListen(new MyMqttClient(i+"")));
+            executorService.execute(new CenyolLikeListen(new MyMqttClient("MBP_" + i)));
 //            executorService.execute(new CenyolLikeTalk(new MyMqttClient("MBP_" + i)));
 
             try {
