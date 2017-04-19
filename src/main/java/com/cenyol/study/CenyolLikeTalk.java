@@ -28,7 +28,7 @@ public class CenyolLikeTalk implements Runnable{
 //                myMqttClient.publish("test",  "hello everybody, I am " + myMqttClient.getClientId() +
 //                    ", now time is " + new Date().toString()
 //                );
-                Thread.sleep(5* 1000);
+                Thread.sleep(6 * 1000);
             } catch (Exception e) {
                 e.printStackTrace();
             }

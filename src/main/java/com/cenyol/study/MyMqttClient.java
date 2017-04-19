@@ -8,8 +8,6 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -17,17 +15,15 @@ import java.util.concurrent.Executors;
  * Created by cenyol on 22/03/2017.
  */
 public class MyMqttClient {
-    public static final int CLIENT_COUNT = 500;
+    public static final int CLIENT_COUNT = 100;
     public static final int TOTAL_TIME_MiLiSECOND = 10 * 1000;
 
-    /**
-     * @param args
-     */
+
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         for (int i = 0; i < CLIENT_COUNT; i++){
-            executorService.execute(new CenyolLikeListen(new MyMqttClient("MBP_" + i)));
-//            executorService.execute(new CenyolLikeTalk(new MyMqttClient("MBP_" + i)));
+//            executorService.execute(new CenyolLikeListen(new MyMqttClient("MBP_01_" + i)));
+            executorService.execute(new CenyolLikeTalk(new MyMqttClient("CENTOS_01_" + i + Utils.RandomString(4))));
 
             try {
                 Thread.sleep(TOTAL_TIME_MiLiSECOND / CLIENT_COUNT);
