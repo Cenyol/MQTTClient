@@ -1,15 +1,18 @@
 package com.cenyol.study;
 
+import com.cenyol.study.utils.MySQL;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.sql.*;
 import java.util.Calendar;
 
 /**
  * Created by cenyol on 22/03/2017.
  */
 public class CustomMQTTCallBack implements MqttCallback{
+
     public void connectionLost(Throwable throwable) {
 
     }
@@ -20,6 +23,8 @@ public class CustomMQTTCallBack implements MqttCallback{
         System.out.println("topic: " + s);
         System.out.println("message: " + mqttMessage.toString());
         System.out.println();
+
+        new MySQL().insert(mqttMessage.toString());
     }
 
     public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {

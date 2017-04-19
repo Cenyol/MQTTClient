@@ -1,4 +1,4 @@
-package com.cenyol.study;
+package com.cenyol.study.utils;
 
 import java.util.Random;
 
