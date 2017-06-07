@@ -6,7 +6,7 @@ package com.cenyol.study;
 public class ServerHost {
     private String protocol = "tcp";
 //    private String ip = "localhost";
-    private String ip = "121.40.130.184";
+    private String ip = "mqtt.cenyol.com";
     private int port = 1883;
 
     public String getBrokerAddress() {

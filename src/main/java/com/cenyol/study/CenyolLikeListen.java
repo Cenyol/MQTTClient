@@ -11,7 +11,7 @@ public class CenyolLikeListen implements Runnable{
     }
 
     public void run() {
-        String[] topics = {"test", "test"};
+        String[] topics = {"$new", "$data"};
         try {
             myMqttClient.subscribe(topics);
         } catch (Exception e) {

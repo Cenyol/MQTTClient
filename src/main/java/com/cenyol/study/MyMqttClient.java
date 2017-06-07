@@ -1,5 +1,6 @@
 package com.cenyol.study;
 
+import com.cenyol.study.utils.HttpRequest;
 import com.cenyol.study.utils.Utils;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
@@ -16,22 +17,11 @@ import java.util.concurrent.Executors;
  * Created by cenyol on 22/03/2017.
  */
 public class MyMqttClient {
-    public static final int CLIENT_COUNT = 1;
-    public static final int TOTAL_TIME_MiLiSECOND = 10 * 1000;
-
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        for (int i = 0; i < CLIENT_COUNT; i++){
-            executorService.execute(new CenyolLikeListen(new MyMqttClient("MBP_01_" + i + Utils.RandomString(4))));
-//            executorService.execute(new CenyolLikeTalk(new MyMqttClient("CENTOS_01_" + i + Utils.RandomString(4))));
-
-            try {
-                Thread.sleep(TOTAL_TIME_MiLiSECOND / CLIENT_COUNT);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+//        executorService.execute(new CenyolLikeListen(new MyMqttClient("save_to_mysql")));
+        executorService.execute(new TimeSync(new MyMqttClient("time_sync")));
     }
 
 
