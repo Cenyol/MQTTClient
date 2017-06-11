@@ -27,6 +27,7 @@ public class CustomMQTTCallBack implements MqttCallback{
 
         // TODO 调用短信接口
 
+
         if (s.equals("$new"))
             HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-device", "data=" + messageString);
         if (s.equals("$data"))

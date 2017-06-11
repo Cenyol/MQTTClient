@@ -20,8 +20,9 @@ public class MyMqttClient {
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-//        executorService.execute(new CenyolLikeListen(new MyMqttClient("save_to_mysql")));
-        executorService.execute(new TimeSync(new MyMqttClient("time_sync")));
+//        executorService.execute(new CenyolLikeListen(new MyMqttClient("paho.java.data.save")));
+//        executorService.execute(new TimeSync(new MyMqttClient("paho.java.time.sync")));
+        executorService.execute(new Weather(new MyMqttClient("paho.java.weather")));
     }
 
 
@@ -64,8 +65,6 @@ public class MyMqttClient {
 
     private void connect() throws MqttException{
         if (sampleClient != null) return;
-
-
         String broker = serverHost.getBrokerAddress();
         sampleClient = new MqttClient(broker, clientId,persistence);
         MqttConnectOptions connOpts = new MqttConnectOptions();
