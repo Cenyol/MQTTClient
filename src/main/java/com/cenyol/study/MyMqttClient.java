@@ -20,8 +20,8 @@ public class MyMqttClient {
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-//        executorService.execute(new CenyolLikeListen(new MyMqttClient("paho.java.data.save")));
-//        executorService.execute(new TimeSync(new MyMqttClient("paho.java.time.sync")));
+        executorService.execute(new CenyolLikeListen(new MyMqttClient("paho.java.data.save")));
+        executorService.execute(new TimeSync(new MyMqttClient("paho.java.time.sync")));
         executorService.execute(new Weather(new MyMqttClient("paho.java.weather")));
     }
 
