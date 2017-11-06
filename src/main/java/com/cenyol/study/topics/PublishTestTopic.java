@@ -1,14 +1,16 @@
-package com.cenyol.study;
+package com.cenyol.study.topics;
+
+import com.cenyol.study.models.MyMqttClient;
 
 import java.util.Date;
 
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class CenyolLikeTalk implements Runnable{
+public class PublishTestTopic implements Runnable{
     private MyMqttClient myMqttClient;
 
-    public CenyolLikeTalk(MyMqttClient myMqttClient) {
+    public PublishTestTopic(MyMqttClient myMqttClient) {
         this.myMqttClient = myMqttClient;
     }
 

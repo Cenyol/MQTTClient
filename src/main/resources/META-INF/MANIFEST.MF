@@ -1,4 +1,4 @@
 Manifest-Version: 1.0
 Class-Path: lib/org.eclipse.paho.client.mqttv3-1.1.0.jar
-Main-Class: com.cenyol.study.MyMqttClient
+Main-Class: com.cenyol.study.models.MyMqttClient
 

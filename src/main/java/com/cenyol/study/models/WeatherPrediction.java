@@ -1,4 +1,4 @@
-package com.cenyol.study;
+package com.cenyol.study.models;
 
 import com.cenyol.study.utils.HttpRequest;
 import com.google.gson.*;
@@ -24,12 +24,18 @@ public class WeatherPrediction {
 
     // 使用心知天气预报API：https://www.seniverse.com/doc#daily
     public String getCurrent() {
-        String string = HttpRequest.sendGet("https://api.seniverse.com/v3/weather/now.json", "key=9itmxkgmzcjcbyr4&location=ip&language=zh-Hans&unit=c&start=0&days=5");
+        String string = HttpRequest.sendGet("https://api.seniverse.com/v3/weather/now.json", "key=9itmxkgmzcjcbyr4&location=ip&language=en&unit=c&start=0&days=5");
 //        String string = "{\"results\":[{\"location\":{\"id\":\"WTMKQ069CCJ7\",\"name\":\"杭州\",\"country\":\"CN\",\"path\":\"杭州,杭州,浙江,中国\",\"timezone\":\"Asia/Shanghai\",\"timezone_offset\":\"+08:00\"},\"now\":{\"text\":\"小雨\",\"code\":\"13\",\"temperature\":\"21\"},\"last_update\":\"2017-06-11T20:35:00+08:00\"}]}";
 
         JsonArray jsonArray = new JsonParser().parse(string).getAsJsonObject().get("results").getAsJsonArray();
-        JsonObject retJsonObj = jsonArray.get(0).getAsJsonObject().get("now").getAsJsonObject();
-        return retJsonObj.toString();
+        JsonObject jsonObject = jsonArray.get(0).getAsJsonObject().get("now").getAsJsonObject();
+        return jsonObject.toString();
+
+//        JsonObject retJsonObj = new JsonObject();
+//        retJsonObj.addProperty("text", jsonObject.get("text").getAsString());
+//        retJsonObj.addProperty("code", jsonObject.get("code").getAsString());
+//        retJsonObj.addProperty("temp", jsonObject.get("temperature").getAsString());
+//        return retJsonObj.toString();
     }
 
     public String getNextThreeDaysSimple() {

@@ -1,6 +1,8 @@
 package com.cenyol.study.utils;
 
 import java.sql.*;
+
+import com.cenyol.study.models.SensorData;
 import com.google.gson.Gson;
 
 /**

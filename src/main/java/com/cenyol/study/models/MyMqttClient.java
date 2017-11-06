@@ -1,7 +1,7 @@
-package com.cenyol.study;
+package com.cenyol.study.models;
 
-import com.cenyol.study.utils.HttpRequest;
-import com.cenyol.study.utils.Utils;
+import com.cenyol.study.callback.SensorDataCbk;
+import com.cenyol.study.models.ServerHost;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -9,23 +9,11 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Arrays;
-import java.util.Date;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Created by cenyol on 22/03/2017.
  */
 public class MyMqttClient {
-
-    public static void main(String[] args) {
-        ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.execute(new CenyolLikeListen(new MyMqttClient("paho.java.data.save")));
-        executorService.execute(new TimeSync(new MyMqttClient("paho.java.time.sync")));
-        executorService.execute(new Weather(new MyMqttClient("paho.java.weather")));
-    }
-
-
     private String clientId = "";
     private ServerHost serverHost;
     private MqttClient sampleClient = null;
@@ -43,7 +31,7 @@ public class MyMqttClient {
             this.connect();
 
             sampleClient.subscribe(topicFilters,new int[]{1,1});
-            System. out .println( "Subscribe success for: " + Arrays.toString(topicFilters));
+            System.out.println( "Subscribe success for: " + Arrays.toString(topicFilters));
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }
@@ -58,6 +46,7 @@ public class MyMqttClient {
             message.setQos(0);
             message.setRetained(true);
             sampleClient.publish(topic,message);
+//            System. out .println( "Publish success for: " + topic);
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }
@@ -72,12 +61,12 @@ public class MyMqttClient {
 //        char[] passwd = {'t', 'e', 's', 't'};
 //        connOpts.setPassword(passwd);
         //connOpts.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1);
-        System. out .println("The MQTT Version is:"+connOpts.getMqttVersion());
+//        System. out .println("The MQTT Version is:"+connOpts.getMqttVersion());
         connOpts.setCleanSession( false );
-        System. out .println( "Connecting to broker: " + broker);
+//        System. out .println( "Connecting to broker: " + broker);
         sampleClient.connect(connOpts);
-        System. out .println( "Connected"  + new Date().toString());
-        sampleClient.setCallback(new CustomMQTTCallBack());
+//        System. out .println( "Connected"  + new Date().toString());
+        sampleClient.setCallback(new SensorDataCbk());
     }
 
 

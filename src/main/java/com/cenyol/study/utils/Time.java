@@ -23,7 +23,7 @@ public class Time {
             this.setType(1);
         if (calendar.get(Calendar.MINUTE) == 00)
             this.setType(2);
-        this.setString(new SimpleDateFormat("MM-dd HH:mm EEE  ").format(calendar.getTime()));
+        this.setString(new SimpleDateFormat("yyyy-MM-dd HH:mm EEE  ").format(calendar.getTime()));
         return new Gson().toJson(this);
     }
 

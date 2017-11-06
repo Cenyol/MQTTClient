@@ -1,11 +1,9 @@
-package com.cenyol.study;
+package com.cenyol.study.utils.runnable;
 
-import com.cenyol.study.utils.SensorData;
+import com.cenyol.study.models.MyMqttClient;
 import com.cenyol.study.utils.Time;
-import com.google.gson.Gson;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * Created by cenyol on 22/03/2017.
@@ -31,7 +29,6 @@ public class TimeSync implements Runnable{
         while (true){
             try {
                 myMqttClient.publish("$time",  time.toJson());
-//                System.out.println(time.toJson());
                 Thread.sleep(60 * 1000);
             } catch (Exception e) {
                 e.printStackTrace();

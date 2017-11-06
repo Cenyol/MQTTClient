@@ -1,12 +1,14 @@
-package com.cenyol.study;
+package com.cenyol.study.topics;
+
+import com.cenyol.study.models.MyMqttClient;
 
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class CenyolLikeListen implements Runnable{
-    private MyMqttClient myMqttClient;
+public class SensorDataAndNewDeviceTopic implements Runnable{
+    public static MyMqttClient myMqttClient;
 
-    public CenyolLikeListen(MyMqttClient myMqttClient) {
+    public SensorDataAndNewDeviceTopic(MyMqttClient myMqttClient) {
         this.myMqttClient = myMqttClient;
     }
 

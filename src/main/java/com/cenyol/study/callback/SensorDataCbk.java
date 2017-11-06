@@ -1,17 +1,16 @@
-package com.cenyol.study;
+package com.cenyol.study.callback;
 
-import com.cenyol.study.utils.HttpRequest;
-import com.cenyol.study.utils.MySQL;
+import com.cenyol.study.drools.DroolsExample;
+import com.cenyol.study.drools.models.raw.AirData;
+import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
-import java.util.Calendar;
-
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class CustomMQTTCallBack implements MqttCallback{
+public class SensorDataCbk implements MqttCallback{
 
     public void connectionLost(Throwable throwable) {
 
@@ -28,12 +27,21 @@ public class CustomMQTTCallBack implements MqttCallback{
         // TODO 调用短信接口
 
 
-        if (s.equals("$new"))
-            HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-device", "data=" + messageString);
-        if (s.equals("$data"))
-            HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-data", "data=" + messageString);
+        // 测试规则引擎期间，暂不保存至数据库
+//        if (s.equals("$new"))
+//            HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-device", "data=" + messageString);
+//        if (s.equals("$data"))
+//            HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-data", "data=" + messageString);
 
-//        System.out.println(sr);
+//        System.out.println(messageString);
+
+        Gson gson = new Gson();
+        AirData airData = gson.fromJson(messageString, AirData.class);
+        DroolsExample.airDataValid(airData);
+//        AirData airData = new AirData(sensorDatas[0].getValue(), sensorDatas[1].getValue());
+//        System.out.println(sensorDatas[0].getValue());
+//        System.out.println(airData);
+
 
         // 暂时不直接保存数据库，而是转发到PHP Server
         // 存数据库

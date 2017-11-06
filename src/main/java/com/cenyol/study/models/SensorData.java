@@ -1,4 +1,4 @@
-package com.cenyol.study.utils;
+package com.cenyol.study.models;
 
 /**
  * Created by cenyol on 16/05/2017.

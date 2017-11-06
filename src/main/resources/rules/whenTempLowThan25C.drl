@@ -1,0 +1,12 @@
+package com.cenyol.study.drools
+
+import com.cenyol.study.drools.models.AirData;
+import com.cenyol.study.drools.actors.AirTempActor;
+
+rule "Temp higher than 40C"
+    when
+        airData : AirData(airTemp < 25.0)
+    then
+        AirTempActor.up();
+        airData.setValid(false);        // 标记本条数据不合格
+end
