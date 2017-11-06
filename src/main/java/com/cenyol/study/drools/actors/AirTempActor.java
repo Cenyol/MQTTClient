@@ -1,6 +1,6 @@
 package com.cenyol.study.drools.actors;
 
-import com.cenyol.study.topics.SensorDataAndNewDeviceTopic;
+import com.cenyol.study.topics.SubscribeSensorDataAndNewDeviceTopic;
 
 /**
  * @author Cenyol mail: mr.cenyol@gmail.com
@@ -21,7 +21,9 @@ public class AirTempActor {
         System.out.println("");
 
         try {
-            SensorDataAndNewDeviceTopic.myMqttClient.publish("$client/" + airConditionor, airConditionorCloseCode);
+            SubscribeSensorDataAndNewDeviceTopic.getInstance()
+                    .getMyMqttClient()
+                    .publish("$client/" + airConditionor, airConditionorCloseCode);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -36,7 +38,9 @@ public class AirTempActor {
         System.out.println("");
 
         try {
-            SensorDataAndNewDeviceTopic.myMqttClient.publish("$client/" + airConditionor, airConditionorOpenCode);
+            SubscribeSensorDataAndNewDeviceTopic.getInstance()
+                    .getMyMqttClient()
+                    .publish("$client/" + airConditionor, airConditionorOpenCode);
         } catch (Exception e) {
             e.printStackTrace();
         }

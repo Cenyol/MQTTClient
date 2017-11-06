@@ -2,10 +2,7 @@ package com.cenyol.study.models;
 
 import com.cenyol.study.callback.SensorDataCbk;
 import com.cenyol.study.models.ServerHost;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Arrays;
@@ -18,6 +15,7 @@ public class MyMqttClient {
     private ServerHost serverHost;
     private MqttClient sampleClient = null;
     private MemoryPersistence persistence;
+    private MqttCallback callback = null;
 
     public MyMqttClient(String clientID) {
         serverHost = new ServerHost();
@@ -29,13 +27,11 @@ public class MyMqttClient {
     public void subscribe(String[] topicFilters) throws Exception{    // 其实就是加入一个群，然后等着接受消息
         try {
             this.connect();
-
             sampleClient.subscribe(topicFilters,new int[]{1,1});
             System.out.println( "Subscribe success for: " + Arrays.toString(topicFilters));
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }
-
     }
 
     public void publish(String topic, String messageString) throws Exception{      // 其实就是加入一个群，然后开始发消息
@@ -46,7 +42,7 @@ public class MyMqttClient {
             message.setQos(0);
             message.setRetained(true);
             sampleClient.publish(topic,message);
-//            System. out .println( "Publish success for: " + topic);
+            System.out.println( "Publish success for: " + topic);
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }
@@ -66,7 +62,7 @@ public class MyMqttClient {
 //        System. out .println( "Connecting to broker: " + broker);
         sampleClient.connect(connOpts);
 //        System. out .println( "Connected"  + new Date().toString());
-        sampleClient.setCallback(new SensorDataCbk());
+        sampleClient.setCallback(this.callback);
     }
 
 
@@ -86,5 +82,13 @@ public class MyMqttClient {
     public void disconnect() throws MqttException {
         sampleClient.disconnect();
         System. out .println( "Disconnected" );
+    }
+
+    public MqttCallback getCallback() {
+        return callback;
+    }
+
+    public void setCallback(MqttCallback callback) {
+        this.callback = callback;
     }
 }
