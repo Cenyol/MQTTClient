@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public class Runner {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.execute(new SubscribeFeedbackTopic(new MyMqttClient("paho.java.feedback")));
+//        executorService.execute(new SubscribeFeedbackTopic(new MyMqttClient("paho.java.feedback")));
 //        executorService.execute(new SubscribeSensorDataAndNewDeviceTopic(new MyMqttClient("paho.java.data.save")));
 //        executorService.execute(new TimeSync(new MyMqttClient("paho.java.time.sync")));
 //        executorService.execute(new Weather(new MyMqttClient("paho.java.weather")));

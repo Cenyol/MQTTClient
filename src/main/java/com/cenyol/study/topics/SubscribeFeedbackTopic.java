@@ -8,15 +8,27 @@ import java.util.concurrent.Executors;
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class SubscribeFeedbackTopic implements Runnable{
-    private MyMqttClient myMqttClient;
+public class SubscribeFeedbackTopic extends BaseTopic implements Runnable{
+    private static SubscribeFeedbackTopic subscribeFeedbackTopic = null;
 
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
-        executorService.execute(new SubscribeFeedbackTopic(new MyMqttClient("paho.java.feedback")));
+        executorService.execute(SubscribeFeedbackTopic.getInstance());
     }
 
-    public SubscribeFeedbackTopic(MyMqttClient myMqttClient) {
+
+    public static SubscribeFeedbackTopic getInstance() {
+        if (subscribeFeedbackTopic == null) {
+            synchronized (SubscribeSensorDataAndNewDeviceTopic.class) {
+                if (subscribeFeedbackTopic == null) {
+                    subscribeFeedbackTopic = new SubscribeFeedbackTopic(new MyMqttClient("paho.java.feedback"));
+                }
+            }
+        }
+        return subscribeFeedbackTopic;
+    }
+
+    private SubscribeFeedbackTopic(MyMqttClient myMqttClient) {
         this.myMqttClient = myMqttClient;
     }
 
@@ -30,7 +42,4 @@ public class SubscribeFeedbackTopic implements Runnable{
         }
     }
 
-    public MyMqttClient getMyMqttClient() {
-        return myMqttClient;
-    }
 }

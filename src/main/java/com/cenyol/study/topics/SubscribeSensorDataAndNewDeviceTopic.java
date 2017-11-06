@@ -1,6 +1,7 @@
 package com.cenyol.study.topics;
 
 import com.cenyol.study.callback.SensorDataCbk;
+import com.cenyol.study.drools.models.raw.Base;
 import com.cenyol.study.models.MyMqttClient;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -8,8 +9,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class SubscribeSensorDataAndNewDeviceTopic implements Runnable{
-    private MyMqttClient myMqttClient;
+public class SubscribeSensorDataAndNewDeviceTopic extends BaseTopic implements Runnable{
     private static SubscribeSensorDataAndNewDeviceTopic subscribeSensorDataAndNewDeviceTopic = null;
 
     public static void main(String[] args) {
@@ -40,9 +40,5 @@ public class SubscribeSensorDataAndNewDeviceTopic implements Runnable{
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public MyMqttClient getMyMqttClient() {
-        return myMqttClient;
     }
 }
