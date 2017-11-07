@@ -30,11 +30,11 @@ public class SubscribeSensorDataAndNewDeviceTopic extends BaseTopic implements R
 
     private SubscribeSensorDataAndNewDeviceTopic(MyMqttClient myMqttClient) {
         this.myMqttClient = myMqttClient;
+        this.myMqttClient.setCallback(new SensorDataCbk());
     }
 
     public void run() {
         String[] topics = {"$new", "$data"};
-        myMqttClient.setCallback(new SensorDataCbk());
         try {
             myMqttClient.subscribe(topics);
         } catch (Exception e) {

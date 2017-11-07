@@ -30,11 +30,11 @@ public class SubscribeFeedbackTopic extends BaseTopic implements Runnable{
 
     private SubscribeFeedbackTopic(MyMqttClient myMqttClient) {
         this.myMqttClient = myMqttClient;
+        this.myMqttClient.setCallback(new FeedbackCbk());
     }
 
     public void run() {
-        String[] topics = {"$feedback", "$feedback"};
-        myMqttClient.setCallback(new FeedbackCbk());
+        String[] topics = {"$feedback", "$null"};
         try {
             myMqttClient.subscribe(topics);
         } catch (Exception e) {

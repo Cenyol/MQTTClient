@@ -43,6 +43,7 @@ public class MyMqttClient {
             message.setRetained(true);
             sampleClient.publish(topic,message);
             System.out.println( "Publish success for: " + topic);
+            System.out.println( "=======================================================");
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }

@@ -3,7 +3,7 @@ package com.cenyol.study.drools
 import com.cenyol.study.drools.models.AirData;
 import com.cenyol.study.drools.actors.AirTempActor;
 
-rule "Temp higher than 40C"
+rule "Temp higher than 25C"
     when
         airData : AirData(airTemp < 25.0)
     then

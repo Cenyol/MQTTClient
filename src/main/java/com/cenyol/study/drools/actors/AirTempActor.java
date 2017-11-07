@@ -1,5 +1,6 @@
 package com.cenyol.study.drools.actors;
 
+import com.cenyol.study.models.MQTTCmdPublishClient;
 import com.cenyol.study.topics.SubscribeSensorDataAndNewDeviceTopic;
 
 /**
@@ -38,8 +39,7 @@ public class AirTempActor {
         System.out.println("");
 
         try {
-            SubscribeSensorDataAndNewDeviceTopic.getInstance()
-                    .getMyMqttClient()
+            MQTTCmdPublishClient.getInstance()
                     .publish("$client/" + airConditionor, airConditionorOpenCode);
         } catch (Exception e) {
             e.printStackTrace();

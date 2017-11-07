@@ -7,6 +7,8 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
+import java.util.Calendar;
+
 /**
  * Created by cenyol on 22/03/2017.
  */
@@ -19,10 +21,10 @@ public class SensorDataCbk implements MqttCallback{
     // 收到消息之后的回调处理
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String messageString = mqttMessage.toString();
-//        System.out.println("message from other publish[" + Calendar.getInstance().getTime() + "]");
-//        System.out.println("topic: " + s);
-//        System.out.println("message: " + messageString);
-//        System.out.println();
+        System.out.println("message from other publish[" + Calendar.getInstance().getTime() + "]");
+        System.out.println("topic: " + s);
+        System.out.println("message: " + messageString);
+        System.out.println();
 
         // TODO 调用短信接口
 
@@ -38,6 +40,8 @@ public class SensorDataCbk implements MqttCallback{
         Gson gson = new Gson();
         AirData airData = gson.fromJson(messageString, AirData.class);
         DroolsExample.airDataValid(airData);
+
+
 //        AirData airData = new AirData(sensorDatas[0].getValue(), sensorDatas[1].getValue());
 //        System.out.println(sensorDatas[0].getValue());
 //        System.out.println(airData);
