@@ -22,8 +22,7 @@ public class AirTempActor {
         System.out.println("");
 
         try {
-            SubscribeSensorDataAndNewDeviceTopic.getInstance()
-                    .getMyMqttClient()
+            MQTTCmdPublishClient.getInstance()
                     .publish("$client/" + airConditionor, airConditionorCloseCode);
         } catch (Exception e) {
             e.printStackTrace();

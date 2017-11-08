@@ -18,6 +18,9 @@ public class DroolsExample {
     }
 
     public static void airDataValid(com.cenyol.study.drools.models.raw.AirData airRawData) {
+        if (airRawData == null) {
+            return;
+        }
         AirData[] sensorDatas = {
                 new AirData(airRawData.getData()[0].getValue(), airRawData.getData()[1].getValue()),
         };
