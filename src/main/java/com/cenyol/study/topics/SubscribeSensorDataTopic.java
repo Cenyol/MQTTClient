@@ -34,7 +34,7 @@ public class SubscribeSensorDataTopic extends BaseTopic implements Runnable{
     }
 
     public void run() {
-        String[] topics = {"$null", "$data"};
+        String[] topics = {"$data", "$null"};
         try {
             myMqttClient.subscribe(topics);
         } catch (Exception e) {

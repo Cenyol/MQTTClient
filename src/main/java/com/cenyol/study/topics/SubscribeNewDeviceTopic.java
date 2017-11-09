@@ -21,7 +21,7 @@ public class SubscribeNewDeviceTopic extends BaseTopic implements Runnable{
         if (subscribeNewDeviceTopic == null) {
             synchronized (SubscribeNewDeviceTopic.class) {
                 if (subscribeNewDeviceTopic == null) {
-                    subscribeNewDeviceTopic = new SubscribeNewDeviceTopic(new MyMqttClient("paho.java.data.save"));
+                    subscribeNewDeviceTopic = new SubscribeNewDeviceTopic(new MyMqttClient("paho.java.new.device.save"));
                 }
             }
         }
