@@ -1,6 +1,9 @@
 package com.cenyol.study.drools.actors;
 
+import com.cenyol.study.callback.SensorDataCbk;
 import com.cenyol.study.models.MQTTCmdPublishClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Cenyol mail: mr.cenyol@gmail.com
@@ -8,14 +11,17 @@ import com.cenyol.study.models.MQTTCmdPublishClient;
  * 处理空气温度
  */
 public class AirTempActor {
-    private static String airConditionor = "5ccf7f36f9af";
+    static Logger logger = LoggerFactory.getLogger(SensorDataCbk.class);
+
+    private static String airConditionor = "$client/5ccf7f36f9af";
     private static String airConditionorOpenCode = "1";
     private static String airConditionorCloseCode = "0";
 
     public static void down() {
         try {
             MQTTCmdPublishClient.getInstance()
-                    .publish("$client/" + airConditionor, airConditionorCloseCode);
+                    .publish(airConditionor, airConditionorCloseCode);
+            logger.debug("op[AirTempActor.down()] publish msg: {}, to topic: {}", airConditionorCloseCode, airConditionor);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -24,7 +30,8 @@ public class AirTempActor {
     public static void up() {
         try {
             MQTTCmdPublishClient.getInstance()
-                    .publish("$client/" + airConditionor, airConditionorOpenCode);
+                    .publish(airConditionor, airConditionorOpenCode);
+            logger.debug("op[AirTempActor.up()] publish msg: {}, to topic: {}", airConditionorCloseCode, airConditionor);
         } catch (Exception e) {
             e.printStackTrace();
         }

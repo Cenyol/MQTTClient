@@ -14,7 +14,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.drools:drools-core:7.4.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.mvel:mvel2:2.3.2.Final" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
     <orderEntry type="library" name="Maven: commons-codec:commons-codec:1.10" level="project" />
     <orderEntry type="library" name="Maven: org.kie:kie-api:7.4.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.uberfire:uberfire-maven-support:1.4.0.Final" level="project" />
@@ -39,5 +38,8 @@
     <orderEntry type="library" name="Maven: org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:6.0.6" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.2" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.12" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.8.0-beta0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.8.0-beta0" level="project" />
   </component>
 </module>

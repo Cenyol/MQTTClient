@@ -42,7 +42,6 @@ public class RuleRunner {
 
         for ( int i = 0; i < rules.length; i++ ) {
             String ruleFile = rules[i];
-            System.out.println( "Loading file: " + ruleFile );
             kbuilder.add( ResourceFactory.newClassPathResource( ruleBaseDirectory + ruleFile ),
                                   ResourceType.DRL );
         }
@@ -53,7 +52,7 @@ public class RuleRunner {
 
         for ( int i = 0; i < facts.length; i++ ) {
             Object fact = facts[i];
-            System.out.println( "Inserting fact: " + fact );
+//            System.out.println( "Inserting fact: " + fact );
             ksession.insert( fact );
         }
 

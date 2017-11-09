@@ -1,9 +1,12 @@
 package com.cenyol.study.models;
 
 import com.cenyol.study.callback.SensorDataCbk;
+import com.cenyol.study.drools.DroolsExample;
 import com.cenyol.study.models.ServerHost;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
@@ -17,18 +20,19 @@ public class MyMqttClient {
     private MemoryPersistence persistence;
     private MqttCallback callback = null;
 
+    Logger logger = LoggerFactory.getLogger(MyMqttClient.class);
+
     public MyMqttClient(String clientID) {
         serverHost = new ServerHost();
         persistence = new MemoryPersistence();
         this.clientId = clientID;
-//        this.clientId = Utils.RandomString(32);
     }
 
     public void subscribe(String[] topicFilters) throws Exception{    // 其实就是加入一个群，然后等着接受消息
         try {
             this.connect();
             sampleClient.subscribe(topicFilters,new int[]{1,1});
-            System.out.println( "Subscribe success for: " + Arrays.toString(topicFilters));
+            logger.debug("Subscribe success for {}", topicFilters);
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }
@@ -42,8 +46,7 @@ public class MyMqttClient {
             message.setQos(0);
             message.setRetained(true);
             sampleClient.publish(topic,message);
-            System.out.println( "Publish success for: " + topic);
-            System.out.println( "=======================================================");
+            logger.debug("Publish success for {}", topic);
         } catch (MqttException me) {
             this.printExceptionInfo(me);
         }
@@ -58,11 +61,10 @@ public class MyMqttClient {
 //        char[] passwd = {'t', 'e', 's', 't'};
 //        connOpts.setPassword(passwd);
         //connOpts.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1);
-//        System. out .println("The MQTT Version is:"+connOpts.getMqttVersion());
+        logger.debug("The MQTT Version is {}", connOpts.getMqttVersion());
         connOpts.setCleanSession( false );
-//        System. out .println( "Connecting to broker: " + broker);
+        logger.debug("Connecting to broker {}", broker);
         sampleClient.connect(connOpts);
-//        System. out .println( "Connected"  + new Date().toString());
         sampleClient.setCallback(this.callback);
     }
 

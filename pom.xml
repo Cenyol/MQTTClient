@@ -2,45 +2,16 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <!-- drools专用 -->
-  <!--<parent>-->
-    <!--<groupId>org.drools</groupId>-->
-    <!--<artifactId>drools</artifactId>-->
-    <!--<version>7.3.0.Final</version>-->
-  <!--</parent>-->
-
   <groupId>com.cenyol.study</groupId>
   <artifactId>Paho-Mqtt-Client</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
-
-
   <name>Paho-Mqtt-Client</name>
   <url>http://maven.apache.org</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
-
-  <!--<repositories>-->
-    <!--&lt;!&ndash; TODO remove this once maven central replicates the jboss repository &ndash;&gt;-->
-    <!--&lt;!&ndash; Included so the examples sources in the distribution zip build out-of-the-box with maven &ndash;&gt;-->
-    <!--<repository>-->
-      <!--<id>jboss-public-repository-group</id>-->
-      <!--<name>JBoss Public Repository Group</name>-->
-      <!--<url>https://repository.jboss.org/nexus/content/groups/public/</url>-->
-      <!--<layout>default</layout>-->
-      <!--<releases>-->
-        <!--<enabled>true</enabled>-->
-        <!--<updatePolicy>never</updatePolicy>-->
-      <!--</releases>-->
-      <!--<snapshots>-->
-        <!--<enabled>true</enabled>-->
-        <!--<updatePolicy>daily</updatePolicy>-->
-      <!--</snapshots>-->
-    <!--</repository>-->
-  <!--</repositories>-->
-
 
   <dependencies>
     <!-- For Drools Internal dependencies -->
@@ -97,6 +68,23 @@
       <groupId>com.google.code.gson</groupId>
       <artifactId>gson</artifactId>
       <version>2.8.2</version>
+    </dependency>
+
+    <!-- 日志依赖 -->
+    <dependency>
+      <groupId>log4j</groupId>
+      <artifactId>log4j</artifactId>
+      <version>1.2.12</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.8.0-beta0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-log4j12</artifactId>
+      <version>1.8.0-beta0</version>
     </dependency>
 
   </dependencies>

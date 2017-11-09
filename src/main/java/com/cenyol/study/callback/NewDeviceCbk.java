@@ -1,5 +1,6 @@
 package com.cenyol.study.callback;
 
+import com.cenyol.study.Runner;
 import com.cenyol.study.drools.DroolsExample;
 import com.cenyol.study.drools.models.raw.AirData;
 import com.cenyol.study.utils.HttpRequest;
@@ -7,6 +8,8 @@ import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
 
@@ -14,6 +17,7 @@ import java.util.Calendar;
  * Created by cenyol on 22/03/2017.
  */
 public class NewDeviceCbk implements MqttCallback{
+    Logger logger = LoggerFactory.getLogger(NewDeviceCbk.class);
 
     public void connectionLost(Throwable throwable) {
 
@@ -22,14 +26,15 @@ public class NewDeviceCbk implements MqttCallback{
     // 收到消息之后的回调处理
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String messageString = mqttMessage.toString();
-//        System.out.println("message from other publish[" + Calendar.getInstance().getTime() + "]");
-//        System.out.println("topic: " + s);
-//        System.out.println("message: " + messageString);
-//        System.out.println();
+        logger.debug("op[SensorDataCbk.messageArrived()] message from other publish[{}]", Calendar.getInstance().getTime());
+        logger.debug("op[SensorDataCbk.messageArrived()] topic: {}", s);
+        logger.debug("op[SensorDataCbk.messageArrived()] message: {}", messageString);
 
         // 测试规则引擎期间，暂不保存至数据库
         if (s.equals("$new")) {
-            HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-device", "data=" + messageString);
+            String url = "http://agriot-api.cenyol.com/site/new-device";
+            HttpRequest.sendPost(url, "data=" + messageString);
+            logger.debug("op[SensorDataCbk.messageArrived()] Send a post request, url: {}, params: {}", url, messageString);
         }
 
 

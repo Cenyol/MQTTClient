@@ -7,6 +7,8 @@ import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Calendar;
 
@@ -14,6 +16,7 @@ import java.util.Calendar;
  * Created by cenyol on 22/03/2017.
  */
 public class SensorDataCbk implements MqttCallback{
+    Logger logger = LoggerFactory.getLogger(SensorDataCbk.class);
 
     public void connectionLost(Throwable throwable) {
 
@@ -22,8 +25,14 @@ public class SensorDataCbk implements MqttCallback{
     // 收到消息之后的回调处理
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String messageString = mqttMessage.toString();
+        logger.debug("op[SensorDataCbk.messageArrived()] message from other publish[{}]", Calendar.getInstance().getTime());
+        logger.debug("op[SensorDataCbk.messageArrived()] topic: {}", s);
+        logger.debug("op[SensorDataCbk.messageArrived()] message: {}", messageString);
+
         if (s.equals("$data")) {
-            HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-data", "data=" + messageString);
+            String url = "http://agriot-api.cenyol.com/site/new-data";
+            HttpRequest.sendPost(url, "data=" + messageString);
+            logger.debug("op[SensorDataCbk.messageArrived()] Send a post request, url: {}, params: {}", url, messageString);
 
             Gson gson = new Gson();
             AirData airData = gson.fromJson(messageString, AirData.class);
