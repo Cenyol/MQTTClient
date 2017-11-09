@@ -13,7 +13,7 @@ import java.util.Calendar;
 /**
  * Created by cenyol on 22/03/2017.
  */
-public class SensorDataCbk implements MqttCallback{
+public class NewDeviceCbk implements MqttCallback{
 
     public void connectionLost(Throwable throwable) {
 
@@ -27,18 +27,9 @@ public class SensorDataCbk implements MqttCallback{
         System.out.println("message: " + messageString);
         System.out.println();
 
-        // TODO 调用短信接口
-
 
         // 测试规则引擎期间，暂不保存至数据库
-        HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-data", "data=" + messageString);
-
-//        System.out.println(messageString);
-
-        Gson gson = new Gson();
-        AirData airData = gson.fromJson(messageString, AirData.class);
-        DroolsExample.airDataValid(airData);
-
+        HttpRequest.sendPost("http://agriot-api.cenyol.com/site/new-device", "data=" + messageString);
 
 //        AirData airData = new AirData(sensorDatas[0].getValue(), sensorDatas[1].getValue());
 //        System.out.println(sensorDatas[0].getValue());

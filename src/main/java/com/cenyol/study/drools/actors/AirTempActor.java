@@ -1,7 +1,6 @@
 package com.cenyol.study.drools.actors;
 
 import com.cenyol.study.models.MQTTCmdPublishClient;
-import com.cenyol.study.topics.SubscribeSensorDataAndNewDeviceTopic;
 
 /**
  * @author Cenyol mail: mr.cenyol@gmail.com
@@ -14,13 +13,6 @@ public class AirTempActor {
     private static String airConditionorCloseCode = "0";
 
     public static void down() {
-        System.out.println("=======================================================");
-        System.out.println("The temp of air too high, it is cooling...");
-        System.out.println("Open the wind door.");
-        System.out.println("Open the air conditioner.");
-        System.out.println("=======================================================");
-        System.out.println("");
-
         try {
             MQTTCmdPublishClient.getInstance()
                     .publish("$client/" + airConditionor, airConditionorCloseCode);
@@ -30,13 +22,6 @@ public class AirTempActor {
     }
 
     public static void up() {
-        System.out.println("=======================================================");
-        System.out.println("The temp of air too low, it is heating...");
-        System.out.println("Close the wind door.");
-        System.out.println("Open the warmer.");
-        System.out.println("=======================================================");
-        System.out.println("");
-
         try {
             MQTTCmdPublishClient.getInstance()
                     .publish("$client/" + airConditionor, airConditionorOpenCode);

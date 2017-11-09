@@ -19,7 +19,7 @@ public class SubscribeFeedbackTopic extends BaseTopic implements Runnable{
 
     public static SubscribeFeedbackTopic getInstance() {
         if (subscribeFeedbackTopic == null) {
-            synchronized (SubscribeSensorDataAndNewDeviceTopic.class) {
+            synchronized (SubscribeNewDeviceTopic.class) {
                 if (subscribeFeedbackTopic == null) {
                     subscribeFeedbackTopic = new SubscribeFeedbackTopic(new MyMqttClient("paho.java.feedback"));
                 }

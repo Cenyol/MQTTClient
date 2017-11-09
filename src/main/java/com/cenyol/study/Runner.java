@@ -1,7 +1,9 @@
 package com.cenyol.study;
 
 import com.cenyol.study.topics.SubscribeFeedbackTopic;
-import com.cenyol.study.topics.SubscribeSensorDataAndNewDeviceTopic;
+import com.cenyol.study.topics.SubscribeNewDeviceTopic;
+import com.cenyol.study.topics.SubscribeSensorDataTopic;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,6 +17,7 @@ public class Runner {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(SubscribeFeedbackTopic.getInstance());
-        executorService.execute(SubscribeSensorDataAndNewDeviceTopic.getInstance());
+        executorService.execute(SubscribeNewDeviceTopic.getInstance());
+        executorService.execute(SubscribeSensorDataTopic.getInstance());
     }
 }
