@@ -12,7 +12,7 @@ public class MQTTCmdPublishClient {
         if (cmdPublishClient == null) {
             synchronized (MQTTCmdPublishClient.class) {
                 if (cmdPublishClient == null) {
-                    cmdPublishClient = new MyMqttClient("paho.java.cmd.publish");
+                    cmdPublishClient = new MyMqttClient("cmd.publish");
                 }
             }
         }

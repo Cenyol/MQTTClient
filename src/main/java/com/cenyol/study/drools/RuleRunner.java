@@ -43,15 +43,11 @@ public class RuleRunner {
 
         InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
-
-        logger.debug("Starting to add the rule files.");
         for ( int i = 0; i < rules.length; i++ ) {
             String ruleFile = rules[i];
             kbuilder.add( ResourceFactory.newClassPathResource( ruleBaseDirectory + ruleFile ),
                                   ResourceType.DRL );
         }
-        logger.debug("Ending to add the rule files.");
-
         Collection<KiePackage> pkgs = kbuilder.getKnowledgePackages();
         kbase.addPackages( pkgs );
         KieSession ksession = kbase.newKieSession();
