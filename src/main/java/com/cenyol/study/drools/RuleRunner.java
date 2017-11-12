@@ -16,6 +16,7 @@
 
 package com.cenyol.study.drools;
 
+import com.cenyol.study.callback.SensorDataCbk;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.impl.KnowledgeBaseFactory;
 import org.kie.api.definition.KiePackage;
@@ -24,10 +25,13 @@ import org.kie.api.runtime.KieSession;
 import org.kie.internal.builder.KnowledgeBuilder;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 
 public class RuleRunner {
+    Logger logger = LoggerFactory.getLogger(RuleRunner.class);
 
     private String ruleBaseDirectory = "rules/";
 
@@ -40,11 +44,13 @@ public class RuleRunner {
         InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
+        logger.debug("Starting to add the rule files.");
         for ( int i = 0; i < rules.length; i++ ) {
             String ruleFile = rules[i];
             kbuilder.add( ResourceFactory.newClassPathResource( ruleBaseDirectory + ruleFile ),
                                   ResourceType.DRL );
         }
+        logger.debug("Ending to add the rule files.");
 
         Collection<KiePackage> pkgs = kbuilder.getKnowledgePackages();
         kbase.addPackages( pkgs );
@@ -52,7 +58,6 @@ public class RuleRunner {
 
         for ( int i = 0; i < facts.length; i++ ) {
             Object fact = facts[i];
-//            System.out.println( "Inserting fact: " + fact );
             ksession.insert( fact );
         }
 

@@ -21,7 +21,7 @@ public class SubscribeSensorDataTopic extends BaseTopic implements Runnable{
         if (subscribeSensorDataTopic == null) {
             synchronized (SubscribeSensorDataTopic.class) {
                 if (subscribeSensorDataTopic == null) {
-                    subscribeSensorDataTopic = new SubscribeSensorDataTopic(new MyMqttClient("paho.java.data.save"));
+                    subscribeSensorDataTopic = new SubscribeSensorDataTopic(new MyMqttClient("data.save"));
                 }
             }
         }

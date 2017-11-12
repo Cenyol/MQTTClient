@@ -21,19 +21,21 @@ public class AirTempActor {
         try {
             MQTTCmdPublishClient.getInstance()
                     .publish(airConditionor, airConditionorCloseCode);
-            logger.debug("op[AirTempActor.down()] publish msg: {}, to topic: {}", airConditionorCloseCode, airConditionor);
+            logger.debug("publish msg: {}, to topic: {}", airConditionorCloseCode, airConditionor);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public static void up() {
+        logger.debug("Entering method.");
         try {
             MQTTCmdPublishClient.getInstance()
                     .publish(airConditionor, airConditionorOpenCode);
-            logger.debug("op[AirTempActor.up()] publish msg: {}, to topic: {}", airConditionorCloseCode, airConditionor);
+            logger.debug("publish msg: {}, to topic: {}", airConditionorOpenCode, airConditionor);
         } catch (Exception e) {
             e.printStackTrace();
         }
+        logger.debug("Leaving method.");
     }
 }

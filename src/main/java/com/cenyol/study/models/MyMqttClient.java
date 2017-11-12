@@ -61,10 +61,11 @@ public class MyMqttClient {
 //        char[] passwd = {'t', 'e', 's', 't'};
 //        connOpts.setPassword(passwd);
         //connOpts.setMqttVersion(MqttConnectOptions.MQTT_VERSION_3_1);
-        logger.debug("The MQTT Version is {}", connOpts.getMqttVersion());
+        logger.debug("The MQTT Version is:"+connOpts.getMqttVersion());
         connOpts.setCleanSession( false );
-        logger.debug("Connecting to broker {}", broker);
+//        System. out .println( "Connecting to broker: " + broker);
         sampleClient.connect(connOpts);
+//        System. out .println( "Connected"  + new Date().toString());
         sampleClient.setCallback(this.callback);
     }
 

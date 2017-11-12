@@ -25,14 +25,14 @@ public class SensorDataCbk implements MqttCallback{
     // 收到消息之后的回调处理
     public void messageArrived(String s, MqttMessage mqttMessage) throws Exception {
         String messageString = mqttMessage.toString();
-        logger.debug("op[SensorDataCbk.messageArrived()] message from other publish[{}]", Calendar.getInstance().getTime());
-        logger.debug("op[SensorDataCbk.messageArrived()] topic: {}", s);
-        logger.debug("op[SensorDataCbk.messageArrived()] message: {}", messageString);
+        logger.debug("message from other publish[{}]", Calendar.getInstance().getTime());
+        logger.debug("topic: {}", s);
+        logger.debug("message: {}", messageString);
 
         if (s.equals("$data")) {
             String url = "http://agriot-api.cenyol.com/site/new-data";
             HttpRequest.sendPost(url, "data=" + messageString);
-            logger.debug("op[SensorDataCbk.messageArrived()] Send a post request, url: {}, params: {}", url, messageString);
+            logger.debug("Send a post request, url: {}, params: {}", url, messageString);
 
             Gson gson = new Gson();
             AirData airData = gson.fromJson(messageString, AirData.class);

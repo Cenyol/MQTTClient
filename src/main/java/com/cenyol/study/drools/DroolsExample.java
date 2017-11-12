@@ -22,10 +22,10 @@ public class DroolsExample {
     }
 
     public static void airDataValid(com.cenyol.study.drools.models.raw.AirData airRawData) {
-        logger.debug("op[DroolsExample.airDataValid()] Enter airDataValid(airRawData = {})", airRawData);
+        logger.debug("Entering method(airRawData = {})", airRawData);
 
         if (airRawData == null) {
-            logger.error("op[DroolsExample.airDataValid()] airRawData is null");
+            logger.error("airRawData is null");
             return;
         }
         AirData[] sensorDatas = {
@@ -34,6 +34,6 @@ public class DroolsExample {
 
         new RuleRunner().runRules( new String[] {"whenTempLowThan25C.drl"}, sensorDatas);
 
-        logger.debug("op[DroolsExample.airDataValid()] Leaving by return void");
+        logger.debug("Leaving by return void");
     }
 }
