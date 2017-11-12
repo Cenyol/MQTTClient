@@ -96,8 +96,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>com.cenyol.study.drools.DroolsScoreExample</mainClass>
-              <!--<mainClass>com.cenyol.study.Runner</mainClass>-->
+              <mainClass>com.cenyol.study.Runner</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
