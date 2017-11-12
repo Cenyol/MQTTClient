@@ -1,12 +1,23 @@
 package com.cenyol.study.drools
 
 import com.cenyol.study.drools.models.AirData;
-import com.cenyol.study.drools.actors.AirTempActor;
+import com.cenyol.study.drools.actors.AirTempActor
+import com.cenyol.study.drools.actors.AirHumiActor;
 
-rule "Temp higher than 25C"
+rule "Temp lower than 25C"
+    salience 99                          // 规则优先级，越大越优先
     when
-        airData : AirData(airTemp < 25.0)
+        airData : AirData(airTemp < 25.0 && createdTime < "21:00:00")
     then
-        AirTempActor.up();
+        AirTempActor.up();              // 升温
         airData.setValid(false);        // 标记本条数据不合格
+end
+
+rule "Humi lower than 45%"
+    salience 9
+    when
+        airData : AirData(airHumi < 45)
+    then
+        AirHumiActor.up();              // 加湿
+        airData.setValid(false);
 end

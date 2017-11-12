@@ -18,7 +18,7 @@ public class DroolsExample {
                 new AirData(30.0, 51.0),
         };
 
-        new RuleRunner().runRules( new String[] {"whenTempHighThan40C.drl"}, sensorDatas);
+        new RuleRunner().runRules( new String[] {"whenTempHighThan25C.drl"}, sensorDatas);
     }
 
     public static void airDataValid(com.cenyol.study.drools.models.raw.AirData airRawData) {
@@ -34,6 +34,6 @@ public class DroolsExample {
 
         new RuleRunner().runRules( new String[] {"whenTempLowThan25C.drl"}, sensorDatas);
 
-        logger.debug("Leaving by return void");
+        logger.debug("Leaving by return void\n\n");
     }
 }
