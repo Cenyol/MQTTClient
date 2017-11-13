@@ -23,10 +23,10 @@ public class DroolsExample {
     }
 
     public static void airDataValid(OneSensorData[] oneSensorData) {
-        logger.debug("Entering method(airRawData = {})", oneSensorData);
+        logger.debug("Entering method(oneSensorData = {})", oneSensorData);
 
         if (oneSensorData == null) {
-            logger.error("airRawData is null");
+            logger.error("oneSensorData is null");
             return;
         }
         AirData[] sensorDatas = {
