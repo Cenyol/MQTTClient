@@ -19,11 +19,11 @@ public class Runner {
     private static Logger logger = LoggerFactory.getLogger(Runner.class);
 
     public static void main(String[] args) {
-        logger.debug("启动程序，开启ExecutorService，建立newCachedThreadPool线程池");
+        logger.debug("Starting application, init ExecutorService, establish newCachedThreadPool");
         ExecutorService executorService = Executors.newCachedThreadPool();
         executorService.execute(SubscribeFeedbackTopic.getInstance());
         executorService.execute(SubscribeNewDeviceTopic.getInstance());
         executorService.execute(SubscribeSensorDataTopic.getInstance());
-        logger.debug("线程池建立完毕，开始执行业务逻辑\n");
+        logger.debug("Establishing thread pool done!\n");
     }
 }

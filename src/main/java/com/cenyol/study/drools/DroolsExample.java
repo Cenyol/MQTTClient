@@ -1,6 +1,7 @@
 package com.cenyol.study.drools;
 
 import com.cenyol.study.drools.models.AirData;
+import com.cenyol.study.drools.models.raw.OneSensorData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,15 +22,15 @@ public class DroolsExample {
         new RuleRunner().runRules( new String[] {"whenTempHighThan25C.drl"}, sensorDatas);
     }
 
-    public static void airDataValid(com.cenyol.study.drools.models.raw.AirData airRawData) {
-        logger.debug("Entering method(airRawData = {})", airRawData);
+    public static void airDataValid(OneSensorData[] oneSensorData) {
+        logger.debug("Entering method(airRawData = {})", oneSensorData);
 
-        if (airRawData == null) {
+        if (oneSensorData == null) {
             logger.error("airRawData is null");
             return;
         }
         AirData[] sensorDatas = {
-                new AirData(airRawData.getData()[0].getValue(), airRawData.getData()[1].getValue()),
+                new AirData(oneSensorData[0].getValue(), oneSensorData[1].getValue()),
         };
 
         new RuleRunner().runRules( new String[] {"whenTempLowThan25C.drl"}, sensorDatas);
