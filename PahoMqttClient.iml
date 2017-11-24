@@ -32,5 +32,6 @@
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.12" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.8.0-beta0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.8.0-beta0" level="project" />
+    <orderEntry type="library" name="CCP_REST_SMS_SDK_JAVA_v2.6.3r" level="project" />
   </component>
 </module>

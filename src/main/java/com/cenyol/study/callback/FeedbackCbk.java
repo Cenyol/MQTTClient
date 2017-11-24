@@ -1,14 +1,9 @@
 package com.cenyol.study.callback;
 
-import com.cenyol.study.drools.DroolsExample;
-import com.cenyol.study.drools.models.raw.AirData;
 import com.cenyol.study.utils.HttpRequest;
-import com.google.gson.Gson;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
-import java.util.Calendar;
 
 /**
  * Created by cenyol on 22/03/2017.

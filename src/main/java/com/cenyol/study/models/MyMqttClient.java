@@ -1,14 +1,9 @@
 package com.cenyol.study.models;
 
-import com.cenyol.study.callback.SensorDataCbk;
-import com.cenyol.study.drools.DroolsExample;
-import com.cenyol.study.models.ServerHost;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Arrays;
 
 /**
  * Created by cenyol on 22/03/2017.

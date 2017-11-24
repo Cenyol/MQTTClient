@@ -1,6 +1,6 @@
 package com.cenyol.study.callback;
 
-import com.cenyol.study.drools.DroolsExample;
+import com.cenyol.study.drools.MyDrools;
 import com.cenyol.study.drools.models.raw.AirData;
 import com.cenyol.study.utils.HttpRequest;
 import com.google.gson.Gson;
@@ -36,7 +36,7 @@ public class SensorDataCbk implements MqttCallback{
 
             Gson gson = new Gson();
             AirData airData = gson.fromJson(messageString, AirData.class);
-            DroolsExample.airDataValid(airData.getData());
+            MyDrools.airDataValid(airData.getData());
         }
 
         // 暂时不直接保存数据库，而是转发到PHP Server
