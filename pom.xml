@@ -65,6 +65,13 @@
       <artifactId>slf4j-log4j12</artifactId>
       <version>1.8.0-beta0</version>
     </dependency>
+    <dependency>
+      <groupId>com.cloopen</groupId>
+      <artifactId>rest.sdk</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/CCP_REST_SMS_SDK_JAVA_v2.6.3r.jar</systemPath>
+    </dependency>
   </dependencies>
 
   <build>
