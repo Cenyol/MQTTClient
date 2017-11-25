@@ -4,11 +4,15 @@ import java.sql.*;
 
 import com.cenyol.study.models.SensorData;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by cenyol on 19/04/2017.
  */
 public class MySQL {
+    Logger logger = LoggerFactory.getLogger(MySQL.class);
+
     // 部分参考：http://www.cnblogs.com/aniuer/archive/2012/09/10/2679241.html
     private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private final String DB_URL = "jdbc:mysql://mysql.cenyol.com/agriot";
@@ -48,21 +52,21 @@ public class MySQL {
         }
     }
 
-    public void query(){
+    public String queryRule(){
         this.connect();
         Statement stmt = null;
         ResultSet rs = null;
+        String content = "";
         try{
             stmt = connection.createStatement();
-            String sql = "SELECT id, text FROM test";
+            String sql = "SELECT * FROM rules;";
             rs = stmt.executeQuery(sql);
 
             while(rs.next()){
                 int id  = rs.getInt("id");
-                String text = rs.getString("text");
-
-                System.out.print("ID: " + id);
-                System.out.println(", 内容: " + text);
+                String name = rs.getString("name");
+                content = rs.getString("content");
+                logger.info("RuleName: {}, Content: {}", name, content);
             }
         }catch(Exception e){
             e.printStackTrace();
@@ -72,10 +76,12 @@ public class MySQL {
                 rs.close();
                 stmt.close();
                 this.connection.close();
+                return content;
             }catch(SQLException se){
                 se.printStackTrace();
             }
         }
+        return "";
     }
 
     public void connect(){

@@ -16,6 +16,7 @@
 
 package com.cenyol.study.drools;
 
+import com.cenyol.study.utils.MySQL;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.impl.KnowledgeBaseFactory;
 import org.kie.api.KieServices;
@@ -77,28 +78,30 @@ public class RuleRunner {
     }
 
     public String loadRulesFromDB() {
-        return "package com.cenyol.study.drools\n" +
-                "\n" +
-                "import com.cenyol.study.drools.models.AirData;\n" +
-                "import com.cenyol.study.drools.actors.AirTempActor\n" +
-                "import com.cenyol.study.drools.actors.AirHumiActor;\n" +
-                "\n" +
-                "rule \"Temp lower than 25C\"\n" +
-                "    salience 99\n" +
-                "    when\n" +
-                "        airData : AirData(airTemp < 25.0 && createdTime < \"21:00:00\")\n" +
-                "    then\n" +
-                "        AirTempActor.up();\n" +
-                "        airData.setValid(false);\n" +
-                "end\n" +
-                "\n" +
-                "rule \"Humi lower than 45%\"\n" +
-                "    salience 9\n" +
-                "    when\n" +
-                "        airData : AirData(airHumi < 45)\n" +
-                "    then\n" +
-                "        AirHumiActor.up();\n" +
-                "        airData.setValid(false);\n" +
-                "end\n";
+        return new MySQL().queryRule();
+
+//        return "package com.cenyol.study.drools\n" +
+//                "\n" +
+//                "import com.cenyol.study.drools.models.AirData;\n" +
+//                "import com.cenyol.study.drools.actors.AirTempActor\n" +
+//                "import com.cenyol.study.drools.actors.AirHumiActor;\n" +
+//                "\n" +
+//                "rule \"Temp lower than 25C\"\n" +
+//                "    salience 99\n" +
+//                "    when\n" +
+//                "        airData : AirData(airTemp < 25.0 && createdTime < \"21:00:00\")\n" +
+//                "    then\n" +
+//                "        AirTempActor.up();\n" +
+//                "        airData.setValid(false);\n" +
+//                "end\n" +
+//                "\n" +
+//                "rule \"Humi lower than 45%\"\n" +
+//                "    salience 9\n" +
+//                "    when\n" +
+//                "        airData : AirData(airHumi < 45)\n" +
+//                "    then\n" +
+//                "        AirHumiActor.up();\n" +
+//                "        airData.setValid(false);\n" +
+//                "end\n";
     }
 }
