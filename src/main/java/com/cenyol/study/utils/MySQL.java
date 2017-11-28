@@ -59,11 +59,10 @@ public class MySQL {
         String content = "";
         try{
             stmt = connection.createStatement();
-            String sql = "SELECT * FROM rules;";
+            String sql = "SELECT * FROM rules where status = 10;";      // status=10表示规则有效
             rs = stmt.executeQuery(sql);
 
             while(rs.next()){
-                int id  = rs.getInt("id");
                 String name = rs.getString("name");
                 content = rs.getString("content");
                 logger.info("RuleName: {}, Content: {}", name, content);

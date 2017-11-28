@@ -26,6 +26,7 @@ import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.kie.internal.builder.KnowledgeBuilder;
+import org.kie.internal.builder.KnowledgeBuilderErrors;
 import org.kie.internal.builder.KnowledgeBuilderFactory;
 import org.kie.internal.io.ResourceFactory;
 import org.slf4j.Logger;
@@ -33,6 +34,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
 import java.util.Collection;
+import java.util.Iterator;
 
 public class RuleRunner {
     Logger logger = LoggerFactory.getLogger(RuleRunner.class);
@@ -65,13 +67,21 @@ public class RuleRunner {
             kbuilder.add( r, ResourceType.DRL );
         }
 
+        if(kbuilder.hasErrors()){
+            logger.error("规则中存在错误，错误消息如下：");
+            KnowledgeBuilderErrors kbuidlerErrors=kbuilder.getErrors();
+            for(Iterator iter = kbuidlerErrors.iterator(); iter.hasNext();) {
+                logger.error(iter.next().toString());
+            }
+        }
+
         Collection<KiePackage> pkgs = kbuilder.getKnowledgePackages();
         kbase.addPackages( pkgs );
         KieSession ksession = kbase.newKieSession();
 
         for ( int i = 0; i < facts.length; i++ ) {
             Object fact = facts[i];
-            System.out.println( "Inserting fact: " + fact );
+            logger.info( "Inserting fact: {}", fact );
             ksession.insert( fact );
         }
         ksession.fireAllRules();
