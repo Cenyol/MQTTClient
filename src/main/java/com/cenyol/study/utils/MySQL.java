@@ -1,6 +1,7 @@
 package com.cenyol.study.utils;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import com.cenyol.study.models.SensorData;
 import com.google.gson.Gson;
@@ -52,11 +53,12 @@ public class MySQL {
         }
     }
 
-    public String queryRule(){
+    public ArrayList<String> queryRule(){
         this.connect();
         Statement stmt = null;
         ResultSet rs = null;
-        String content = "";
+        String content;
+        ArrayList<String> contents = new ArrayList<String>();
         try{
             stmt = connection.createStatement();
             String sql = "SELECT * FROM rules where status = 10;";      // status=10表示规则有效
@@ -65,6 +67,7 @@ public class MySQL {
             while(rs.next()){
                 String name = rs.getString("name");
                 content = rs.getString("content");
+                contents.add(content);
                 logger.info("RuleName: {}, Content: {}", name, content);
             }
         }catch(Exception e){
@@ -75,12 +78,12 @@ public class MySQL {
                 rs.close();
                 stmt.close();
                 this.connection.close();
-                return content;
+                return contents;
             }catch(SQLException se){
                 se.printStackTrace();
             }
         }
-        return "";
+        return null;
     }
 
     public void connect(){

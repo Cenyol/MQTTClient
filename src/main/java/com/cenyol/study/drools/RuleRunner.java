@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -53,20 +54,15 @@ public class RuleRunner {
     }
 
 
-    public void runRulesFromDB(String[] rules,
-                         Object[] facts) {
-
+    public void runRulesFromDB(Object[] facts) {
         InternalKnowledgeBase kbase = KnowledgeBaseFactory.newKnowledgeBase();
         KnowledgeBuilder kbuilder = KnowledgeBuilderFactory.newKnowledgeBuilder();
 
-        String ruleContent = this.loadRulesFromDB();
-        for ( int i = 0; i < rules.length; i++ ) {
-            String ruleFile = rules[i];
-            logger.info( "Loading rules from db: " + ruleFile );
+        ArrayList<String> ruleContents = this.loadRulesFromDB();
+        for (String ruleContent : ruleContents) {
             Resource r = ResourceFactory.newReaderResource(new StringReader(ruleContent));
             kbuilder.add( r, ResourceType.DRL );
         }
-
         if(kbuilder.hasErrors()){
             logger.error("规则中存在错误，错误消息如下：");
             KnowledgeBuilderErrors kbuidlerErrors=kbuilder.getErrors();
@@ -87,31 +83,7 @@ public class RuleRunner {
         ksession.fireAllRules();
     }
 
-    public String loadRulesFromDB() {
+    public ArrayList<String> loadRulesFromDB() {
         return new MySQL().queryRule();
-
-//        return "package com.cenyol.study.drools\n" +
-//                "\n" +
-//                "import com.cenyol.study.drools.models.AirData;\n" +
-//                "import com.cenyol.study.drools.actors.AirTempActor\n" +
-//                "import com.cenyol.study.drools.actors.AirHumiActor;\n" +
-//                "\n" +
-//                "rule \"Temp lower than 25C\"\n" +
-//                "    salience 99\n" +
-//                "    when\n" +
-//                "        airData : AirData(airTemp < 25.0 && createdTime < \"21:00:00\")\n" +
-//                "    then\n" +
-//                "        AirTempActor.up();\n" +
-//                "        airData.setValid(false);\n" +
-//                "end\n" +
-//                "\n" +
-//                "rule \"Humi lower than 45%\"\n" +
-//                "    salience 9\n" +
-//                "    when\n" +
-//                "        airData : AirData(airHumi < 45)\n" +
-//                "    then\n" +
-//                "        AirHumiActor.up();\n" +
-//                "        airData.setValid(false);\n" +
-//                "end\n";
     }
 }

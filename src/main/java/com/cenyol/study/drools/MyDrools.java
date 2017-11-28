@@ -37,7 +37,7 @@ public class MyDrools {
             AirData[] sensorDatas = {
                     new AirData(oneSensorData[0].getValue(), oneSensorData[1].getValue()),
             };
-            new RuleRunner().runRulesFromDB( new String[] {"whenTempLowThan25C.drl"}, sensorDatas);
+            new RuleRunner().runRulesFromDB(sensorDatas);
         }
         logger.debug("Leaving by return void\n\n");
     }
