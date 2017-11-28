@@ -62,7 +62,7 @@ public class RuleRunner {
         String ruleContent = this.loadRulesFromDB();
         for ( int i = 0; i < rules.length; i++ ) {
             String ruleFile = rules[i];
-            System.out.println( "Loading rules from db: " + ruleFile );
+            logger.info( "Loading rules from db: " + ruleFile );
             Resource r = ResourceFactory.newReaderResource(new StringReader(ruleContent));
             kbuilder.add( r, ResourceType.DRL );
         }
