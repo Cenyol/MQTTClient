@@ -72,7 +72,8 @@ public class RuleRunner {
                 logger.error(iter.next().toString());
                 errorMsg += iter.next().toString();
             }
-            String postJson = "{\"num\":\"rune-engine-0001\", \"name\":\"规则引擎\",\"level\":3,\"describtion\":\"" + errorMsg + "\"}";
+            String postJson = "{\"num\":\"rule-engine-0001\", \"code\":20001," +
+                    " \"name\":\"Rule Engine\",\"level\":3,\"describtion\":\"rule errors\"}";
             HttpRequest.sendPost("http://agriot-api.cenyol.com/operate-log/save", "data=" + postJson);
             return ;
         }
