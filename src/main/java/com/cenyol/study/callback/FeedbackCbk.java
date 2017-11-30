@@ -24,7 +24,7 @@ public class FeedbackCbk implements MqttCallback{
         String messageString = mqttMessage.toString();
         logger.debug("message from other publish[{}]", Calendar.getInstance().getTime());
         logger.debug("topic: {}", s);
-        logger.debug("message: {}\n\n", messageString);
+        logger.debug("message: {}\n", messageString);
 
         // 测试规则引擎期间，暂不保存至数据库
         if (s.equals("$feedback"))

@@ -27,7 +27,7 @@ public class SensorDataCbk implements MqttCallback{
         String messageString = mqttMessage.toString();
         logger.debug("message from other publish[{}]", Calendar.getInstance().getTime());
         logger.debug("topic: {}", s);
-        logger.debug("message: {}\n\n", messageString);
+        logger.debug("message: {}\n", messageString);
 
         if (s.equals("$data")) {
             String url = "http://agriot-api.cenyol.com/site/new-data";

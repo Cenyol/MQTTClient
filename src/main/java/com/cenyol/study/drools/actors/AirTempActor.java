@@ -14,8 +14,8 @@ public class AirTempActor {
     static Logger logger = LoggerFactory.getLogger(SensorDataCbk.class);
 
     private static String airConditionor = "$client/5ccf7f36f9af";
-    private static String airConditionorOpenCode = "1";
-    private static String airConditionorCloseCode = "0";
+    private static String airConditionorOpenCode = "101:01:Open automatically from Rule Engine.";
+    private static String airConditionorCloseCode = "100:01:Close automatically from Rule Engine.";
 
     public static void down() {
         try {
