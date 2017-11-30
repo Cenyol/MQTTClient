@@ -16,6 +16,7 @@
 
 package com.cenyol.study.drools;
 
+import com.cenyol.study.utils.HttpRequest;
 import com.cenyol.study.utils.MySQL;
 import org.drools.core.impl.InternalKnowledgeBase;
 import org.drools.core.impl.KnowledgeBaseFactory;
@@ -66,11 +67,15 @@ public class RuleRunner {
         if(kbuilder.hasErrors()){
             logger.error("规则中存在错误，错误消息如下：");
             KnowledgeBuilderErrors kbuidlerErrors=kbuilder.getErrors();
+            String errorMsg = "";
             for(Iterator iter = kbuidlerErrors.iterator(); iter.hasNext();) {
                 logger.error(iter.next().toString());
+                errorMsg += iter.next().toString();
             }
+            String postJson = "{\"num\":\"rune-engine-0001\", \"name\":\"规则引擎\",\"level\":3,\"describtion\":\"" + errorMsg + "\"}";
+            HttpRequest.sendPost("http://agriot-api.cenyol.com/operate-log/save", "data=" + postJson);
+            return ;
         }
-
         Collection<KiePackage> pkgs = kbuilder.getKnowledgePackages();
         kbase.addPackages( pkgs );
         KieSession ksession = kbase.newKieSession();
